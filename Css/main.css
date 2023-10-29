@@ -275,7 +275,7 @@ a {
     width: 15px;
 }
 
-.header .main-nav li:hover .mega {
+.header .main-nav li:hover .mega,.mega.active {
     opacity: 1;
     z-index: 1;
     top: 73px;
@@ -985,14 +985,14 @@ a {
     position: relative;
 }
 
-.our-skills .skills .skill .bar::before {
-    content: '';
+.our-skills .skills .skill .bar span {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
-    width: 80%;
+    width: 0;
     background-color: var(--main-color);
+   transition: .3s;
 }
 
 .our-skills .skills .skill:nth-child(2) .bar::before {
@@ -1481,7 +1481,7 @@ a {
     cursor: pointer;
 }
 
-.videos ul a:hover {
+.videos ul a:hover , .videos ul li.active a {
     background-color: #fafafa;
     color: var(--main-color);
 }
