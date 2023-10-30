@@ -827,22 +827,22 @@
       <div class="container">
         <div class="box">
           <i class="far fa-user fa-2x fa-fw"></i>
-          <span>150</span>
+          <span data-target="150">0</span>
           <span>Clients</span>
         </div>
         <div class="box">
           <i class="fas fa-code fa-2x fa-fw"></i>
-          <span>135</span>
+          <span data-target="45">0</span>
           <span>Projects</span>
         </div>
         <div class="box">
           <i class="fas fa-globe-asia fa-2x fa-fw"></i>
-          <span>50</span>
+          <span data-target="13">0</span>
           <span>Countries</span>
         </div>
         <div class="box">
           <i class="far fa-money-bill-alt fa-2x fa-fw"></i>
-          <span>500</span>
+          <span data-target="500">0</span>
           <span>Money</span>
         </div>
       </div>
@@ -943,27 +943,71 @@
     function random(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    /////////////////////
-    
-    /////////////////////
-    let randomNum;
-    let i = 0;
-    document
-      .querySelectorAll(".our-skills .skills .skill .bar span")
-      .forEach((skill) => {
-        randomNum = random(20, 100);
-        skill.style.width = `${randomNum}%`;
-        i++;
-        document.querySelector(
-          `.our-skills .skills .skill:nth-child(${i}) span `
-        ).innerHTML = `${randomNum}%`;
-      });
 
-    //
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    let num = document.querySelectorAll(".stats span:first-of-type");
+
+    let started = false;
+
+    window.onscroll = function () {
+      if (window.scrollY >= document.querySelector(".stats").offsetTop - 250) {
+        if (!started) {
+          num.forEach((num) => count(num));
+          started = true;
+        }
+      }
+    };
+
+    function count(num) {
+      let target = num.dataset.target;
+      let counter = setInterval(() => {
+        num.textContent++;
+        if (num.textContent == target) {
+          clearInterval(counter);
+        }
+      }, 2000 / target );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     function updateCountdown() {
       const now = new Date();
-      const newYear = new Date(now.getFullYear() + 1, 0, 1); 
+      const newYear = new Date(now.getFullYear() + 1, 0, 1);
       const timeLeft = newYear - now;
 
       const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -978,7 +1022,18 @@
       document.getElementById("minutes").textContent = formatTime(minutes);
       document.getElementById("seconds").textContent = formatTime(seconds);
     }
-
+    let randomNum;
+    let i = 0;
+    document
+      .querySelectorAll(".our-skills .skills .skill .bar span")
+      .forEach((skill) => {
+        randomNum = random(20, 100);
+        skill.style.width = `${randomNum}%`;
+        i++;
+        document.querySelector(
+          `.our-skills .skills .skill:nth-child(${i}) span `
+        ).innerHTML = `${randomNum}%`;
+      });
     function formatTime(time) {
       return time < 10 ? "0" + time : time;
     }
@@ -987,16 +1042,13 @@
 
     setInterval(updateCountdown, 1000);
 
-    document.querySelectorAll('.stats span:first-of-type').forEach(stat=>{
-        stat.innerHTML = random(100, 1000)
-    })
-    document.querySelectorAll('.videos .time li').forEach(item=>{
-        item.onclick = ()=>{
-            document.querySelectorAll('.videos .time li').forEach(item=>{
-                item.classList.remove('active')
-            })
-            item.classList.add('active')
-        }
-    })
+    document.querySelectorAll(".videos .time li").forEach((item) => {
+      item.onclick = () => {
+        document.querySelectorAll(".videos .time li").forEach((item) => {
+          item.classList.remove("active");
+        });
+        item.classList.add("active");
+      };
+    });
   </script>
 </html>
