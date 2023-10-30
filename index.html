@@ -937,7 +937,6 @@
   </body>
   <script>
     document.querySelector(".mega-opener").onclick = () => {
-      console.log("clicked");
       document.querySelector(".mega").classList.toggle("active");
     };
     function random(min, max) {
@@ -964,14 +963,23 @@
 
 
     let num = document.querySelectorAll(".stats span:first-of-type");
+    let skill = document.querySelectorAll(".skills .skill .bar span");
+
 
     let started = false;
+    let started2 = false;
 
     window.onscroll = function () {
       if (window.scrollY >= document.querySelector(".stats").offsetTop - 250) {
         if (!started) {
           num.forEach((num) => count(num));
           started = true;
+        }
+      }
+      if (window.scrollY >= document.querySelector(".our-skills").offsetTop - 500)  {
+        if (!started2) {
+          skill.forEach((skill)=>length(skill) )
+          started2 = true;
         }
       }
     };
@@ -985,21 +993,6 @@
         }
       }, 2000 / target );
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1022,26 +1015,28 @@
       document.getElementById("minutes").textContent = formatTime(minutes);
       document.getElementById("seconds").textContent = formatTime(seconds);
     }
+
+    setInterval(updateCountdown, 1000);
+
     let randomNum;
     let i = 0;
-    document
-      .querySelectorAll(".our-skills .skills .skill .bar span")
-      .forEach((skill) => {
+      function length(skill){
         randomNum = random(20, 100);
         skill.style.width = `${randomNum}%`;
         i++;
         document.querySelector(
           `.our-skills .skills .skill:nth-child(${i}) span `
         ).innerHTML = `${randomNum}%`;
-      });
+      }
+
+
     function formatTime(time) {
       return time < 10 ? "0" + time : time;
     }
 
-    updateCountdown();
 
-    setInterval(updateCountdown, 1000);
 
+  
     document.querySelectorAll(".videos .time li").forEach((item) => {
       item.onclick = () => {
         document.querySelectorAll(".videos .time li").forEach((item) => {
